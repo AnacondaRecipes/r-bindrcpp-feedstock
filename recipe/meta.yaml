@@ -16,7 +16,6 @@ source:
 
 build:
   number: 0
-  skip: true  # [win32]
 
   rpaths:
     - lib/R/lib/
@@ -24,20 +23,21 @@ build:
 
 requirements:
   build:
+    - {{ compiler('cxx') }}  # [not win]
+    - {{ compiler('c') }}    # [not win]
     - r-base
     - r-rcpp
     - r-bindr
     - r-plogr
-    - posix                # [win]
-    - {{native}}toolchain  # [win]
-    - gcc                  # [not win]
+    - posix                  # [win]
+    - {{native}}toolchain    # [win]
 
   run:
     - r-base
     - r-rcpp
     - r-bindr
     - r-plogr
-    - libgcc  # [not win]
+    - {{native}}gcc-libs     # [win]
 
 test:
   commands:
