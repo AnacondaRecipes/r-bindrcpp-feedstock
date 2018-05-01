@@ -1,4 +1,4 @@
-{% set version = '0.2' %}
+{% set version = '0.2.2' %}
 
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
@@ -12,18 +12,12 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/bindrcpp_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/bindrcpp/bindrcpp_{{ version }}.tar.gz
-  sha256: d0efa1313cb8148880f7902a4267de1dcedae916f28d9a0ef5911f44bf103450
-
-
-  # patches:
-   # List any patch files here
-   # - fix.patch
+  sha256: 48130709eba9d133679a0e959e49a7b14acbce4f47c1e15c4ab46bd9e48ae467
 
 build:
   merge_build_host: True  # [win]
   # If this is a new build for the same version, increment the build number.
   number: 0
-
 
   # This is required to make R link correctly on Linux.
   rpaths:
@@ -41,15 +35,15 @@ requirements:
 
   host:
     - r-base
-    - r-rcpp
-    - r-bindr
+    - r-rcpp >=0.12.16
+    - r-bindr >=0.1.1
     - r-plogr
 
   run:
     - r-base
     - {{native}}gcc-libs         # [win]
-    - r-rcpp
-    - r-bindr
+    - r-rcpp >=0.12.16
+    - r-bindr >=0.1.1
     - r-plogr
 
 test:
@@ -82,25 +76,25 @@ extra:
 
 # Package: bindrcpp
 # Title: An 'Rcpp' Interface to Active Bindings
+# Version: 0.2.2
+# Date: 2018-03-29
+# Authors@R: c( person("Kirill", "M\u00fcller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org", comment = c(ORCID = "0000-0002-1416-3412")), person("RStudio", role = "cph") )
 # Description: Provides an easy way to fill an environment with active bindings that call a C++ function.
-# Authors@R: c( person("Kirill", "Muller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org"), person("RStudio", role = "cph") )
-# Version: 0.2
-# Date: 2017-06-15
+# License: MIT + file LICENSE
 # URL: https://github.com/krlmlr/bindrcpp, https://krlmlr.github.io/bindrcpp
 # BugReports: https://github.com/krlmlr/bindrcpp/issues
-# Imports: Rcpp, bindr
+# Imports: bindr (>= 0.1.1), Rcpp (>= 0.12.16)
 # Suggests: testthat
-# LinkingTo: Rcpp, plogr
-# RoxygenNote: 6.0.1
-# LazyData: true
-# License: MIT + file LICENSE
+# LinkingTo: plogr, Rcpp
 # Encoding: UTF-8
+# LazyData: true
+# RoxygenNote: 6.0.1.9000
 # NeedsCompilation: yes
-# Packaged: 2017-06-15 20:53:22 UTC; muelleki
-# Author: Kirill Muller [aut, cre], RStudio [cph]
+# Packaged: 2018-03-29 13:33:00 UTC; muelleki
+# Author: Kirill Muller [aut, cre] (<https://orcid.org/0000-0002-1416-3412>), RStudio [cph]
 # Maintainer: Kirill Muller <krlmlr+r@mailbox.org>
 # Repository: CRAN
-# Date/Publication: 2017-06-17 23:52:40 UTC
+# Date/Publication: 2018-03-29 14:09:09 UTC
 
 # See
 # http://docs.continuum.io/conda/build.html for
